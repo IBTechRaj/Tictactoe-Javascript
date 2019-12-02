@@ -1,40 +1,24 @@
-const boardModule = (() => {
-  let squares = ["", "", "", "", "", "", "", "", ""];
-
+const board = (() => {
   let grid = new Array(9);
   grid.fill(null);
 
   const drawGrid = () =>
     grid
-      .map((_, index) => `<div class="square" data-value="${index}"></div>`)
+      .map((_, index) => `<div class="cell" data-value="${index}"></div>`)
       .join("");
 
-  const renderBoard = () => {
-    const tableCells = document.querySelectorAll("square");
-    tableCells.forEach((cell, index) => {
-      cell.innerHTML = squares[index];
-    });
+  const resetBoard = () => {
+    grid = grid.fill(null);
   };
 
-  const emptySquares = () => squares.includes("");
-  const resetBoard = () => {
-    squares = ["", "", "", "", "", "", "", "", ""];
-  };
-  const readSquare = index => squares[index];
-  const changeSquare = (index, value) => {
-    square[index] = value;
-    return squares;
-  };
-  const getSquare = () => squares;
+  const emptyCell = currentValue => currentValue !== null;
+
   return {
-    renderBoard,
-    emptySquares,
+    grid,
+    drawGrid,
     resetBoard,
-    readSquare,
-    changeSquare,
-    getSquare,
-    drawGrid
+    emptyCell
   };
 })();
 
-export default boardModule;
+export default board;

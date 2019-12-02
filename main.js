@@ -1,20 +1,22 @@
+import player from "./src/js/player.js";
+import board from "./src/js/board.js";
 import game from "./src/js/game.js";
 
-function start() {
+var docRoot = document.getElementById("docRoot");
+var gameCanvas = docRoot.querySelector("#app");
+const symbol = docRoot.querySelectorAll(".symbol");
+const button = docRoot.querySelector("button");
+
+gameCanvas.innerHTML = board.drawGrid();
+const cell = docRoot.querySelectorAll(".cell");
+symbol.forEach(sym => sym.addEventListener("click", player.picksymbol));
+gameCanvas.addEventListener("click", game.cellClickedEventHandler);
+
+const bottonClickEventHandler = () => {
   game.resetBtn();
-  game.listenClicks(game.board.changeSquare, game.board.renderBoard, start);
-  const name1 = document.querySelector("#name1");
-  name1.addEventListener("input", e => {
-    game.players.X.changeName(e.target.value);
+  let count = 0;
+  cell.forEach(num => {
+    num.innerHTML = "";
   });
-  const name2 = document.querySelector("#name2");
-  name2.addEventListener("input", e => {
-    game.players.O.changeName(e.target.value);
-  });
-  const button = document.querySelector(".button");
-  button.addEventListener("click", () => {
-    game.resetBtn();
-    button.classList.add("hide");
-  });
-}
-start();
+};
+button.addEventListener("click", bottonClickEventHandler);

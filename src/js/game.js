@@ -1,73 +1,68 @@
 import board from "./board.js";
-import player from "./player.js";
+import Players from "./player.js";
 
-const gameModule = (() => {
-  let winner = null;
-  let tie = null;
-  let turn = "X";
+const gameFactory = (() => {
+  let won = null;
+  let draw = null;
 
-  const players = {
-    X: player("X"),
-    O: player("O")
-  };
+  const winningMovesOn3x3Board = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
 
   const resetBtn = () => {
     board.resetBoard();
-    players.X.resetPlayer();
-    players.O.resetPlayer();
-    winner = null;
-    tie = null;
-    turn = "X";
-    board.renderBoard();
   };
 
-  const checkWin = moves => {
-    const match = wins.map(combo => {
-      let temp = true;
-      combo.forEach(value => {
-        if (!moves.includes(value)) temp = false;
-      });
-      return temp;
-    });
-    return match.includes(true) ? turn : null;
-  };
-
-  const checkTie = () => !board.emptySquares() && !winner;
-
-  const changeTurn = () => {
-    turn = turn === "X" ? "O" : "X";
-    return turn;
-  };
-
-  const listenClicks = (changeSquare, renderBoard) => {
-    const tableCells = document.querySelectorAll(".square");
-    tableCells.forEach((cell, index) =>
-      cell.addEventListener("click", () => {
-        if (board.readSquare(index) === "") {
-          if (!winner && !tie) {
-            changeSquare(index, turn);
-            const tempMove = players[turn].addMove(index + 1);
-            winner = checkWin(tempMove);
-            tie = checkTie();
-            renderBoard();
-            changeTurn();
-            showMsg(`Make your move, ${turn} (${players[turn].getName()}) `);
-          }
-          if (winner)
-            showMsg(`Winner is  ${winner} (${players[winner].getName()})`);
-          if (tie) showMsg("That's Tie, folks");
-          if (winner || tie) showBtn();
-        }
-      })
+  const gameIsWon = currentPlayer => {
+    return winningMovesOn3x3Board.reduce(
+      (a, c) =>
+        a |
+        (board.grid[c[0]] === currentPlayer &&
+          board.grid[c[1]] === currentPlayer &&
+          board.grid[c[2]] === currentPlayer),
+      false
     );
+  };
+
+  const checkTie = x => board.grid.every(board.emptyCell) && x === 0;
+
+  const cellClickedEventHandler = evt => {
+    const cellValue = evt.target.dataset.value;
+    if (!evt.target.classList.contains("cell")) return;
+
+    if (board.grid[cellValue] !== null) {
+      alert("Position is already filled up - try another cell.");
+      return;
+    }
+    board.grid[cellValue] = Players.player;
+    evt.target.innerHTML = Players.player;
+
+    won = gameIsWon(Players.player);
+
+    draw = checkTie(won);
+    if (won) {
+      alert(`the game was won by player with symbol ${Players.player}`);
+      return;
+    }
+    if (draw) {
+      alert(`this is a tie`);
+    }
+    Players.player = Players.player === "X" ? "O" : "X";
   };
 
   return {
     resetBtn,
-    checkWin,
+    gameIsWon,
     checkTie,
-    changeTurn
+    cellClickedEventHandler
   };
 })();
 
-export default gameModule;
+export default gameFactory;
