@@ -1,4 +1,4 @@
-const Player = (() => {
+const playerModule = (symbol => {
   let name = "";
   let getName = () => {
     return name;
@@ -26,4 +26,4 @@ const Player = (() => {
   };
 })();
 
-export default player;
+export default playerModule;

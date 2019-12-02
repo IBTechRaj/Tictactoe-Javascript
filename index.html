@@ -5,6 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <link src="./src/style/index.css" />
   </head>
-  <body></body>
+  <body>
+    <div id="app" class="app">
+      <table>
+        <tr>
+          <th colspan="3" class="">
+            <h3 class="msg"></h3>
+          </th>
+        </tr>
+        <tr>
+          <th colspan="3" class="">
+            <label for="name1">Player 1 ('X')</label>
+            <input id="name1" name="name1" type="text" />
+          </th>
+        </tr>
+        <tr>
+          <th colspan="3" class="">
+            <label for="name2">Player 2 ('O')</label>
+            <input id="name2" name="name2" type="text" />
+          </th>
+        </tr>
+        <tr>
+          <td class="square"></td>
+          <td class="square"></td>
+          <td class="square"></td>
+        </tr>
+        <tr>
+          <td class="square"></td>
+          <td class="square"></td>
+          <td class="square"></td>
+        </tr>
+        <tr>
+          <td class="square"></td>
+          <td class="square"></td>
+          <td class="square"></td>
+        </tr>
+      </table>
+    </div>
+    <script src="./game.js" type="module"></script>
+  </body>
 </html>

@@ -1,5 +1,14 @@
-const board = (() => {
+const boardModule = (() => {
   let squares = ["", "", "", "", "", "", "", "", ""];
+
+  let grid = new Array(9);
+  grid.fill(null);
+
+  const drawGrid = () =>
+    grid
+      .map((_, index) => `<div class="square" data-value="${index}"></div>`)
+      .join("");
+
   const renderBoard = () => {
     const tableCells = document.querySelectorAll("square");
     tableCells.forEach((cell, index) => {
@@ -23,8 +32,9 @@ const board = (() => {
     resetBoard,
     readSquare,
     changeSquare,
-    getSquare
+    getSquare,
+    drawGrid
   };
 })();
 
-export default board;
+export default boardModule;
