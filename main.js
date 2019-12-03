@@ -11,7 +11,6 @@ let submit = document.querySelector(".submit");
 let name1 = document.querySelector("#name1");
 let name2 = document.querySelector("#name2");
 
-// gameCanvas.hidden = true;
 reset.hidden = true;
 root.hidden = true;
 
