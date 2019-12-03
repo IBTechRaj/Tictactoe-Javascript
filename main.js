@@ -14,7 +14,7 @@ let name2 = document.querySelector("#name2");
 reset.hidden = true;
 root.hidden = true;
 
-gameCanvas.innerHTML = board.drawGrid();
+//gameCanvas.innerHTML = board.drawGrid();
 const cell = docRoot.querySelectorAll(".cell");
 symbol.forEach(sym => sym.addEventListener("click", player.picksymbol));
 
@@ -31,6 +31,7 @@ const submitButtonClickEventHandler = evt => {
   if (!name1.value || !name2.value) {
     alert("Please enter your name(s), a required field(s) are empty");
   } else {
+    gameCanvas.innerHTML = board.drawGrid();
     name1.value;
     name2.value;
     game.names["X"] = name1.value;
@@ -63,9 +64,9 @@ const cellClickedEventHandler = evt => {
     game.won = game.gameIsWon(players.player);
     game.draw = game.checkTie(game.won);
     if (game.won && players.player === "X") {
-      alert(`${game.names.X} won the game`);
+      alert(`Congratulation ${game.names.X}! You won the game`);
     } else if (game.won && players.player === "O") {
-      alert(`${game.names.O} won the game`);
+      alert(`Congratulations ${game.names.O}! You won the game`);
     }
     if (game.draw) {
       alert(`this is a tie`);
