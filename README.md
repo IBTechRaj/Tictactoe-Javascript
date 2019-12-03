@@ -8,7 +8,7 @@ To test the game, clone the repo on your local machine, by typing on your termin
 
 git clone `git@github.com:IBTechRaj/tictactoe-javascript.git`
 
-`cd` tictactoe-javascript
+`cd` tictactoe-javascript.
 To run it on the browser click on `Go Live` if your editor is VSCode, it's a bottom of the editor, or find the folder in your machine, go to html file and run it on the browser of your choice.
 
 #### Game Rules:
@@ -27,12 +27,11 @@ To run it on the browser click on `Go Live` if your editor is VSCode, it's a bot
 
 #### Concepts practiced:
 
-Scope & Closures:
-IIFEs
-Module Pattern
-Factory Functions
-DOM Manipulation
-Minimax Algorithm
+- Scope & Closures:
+- IIFEs
+- Module Pattern
+- Factory Functions
+- DOM Manipulation
 
 #### Authors:
 
