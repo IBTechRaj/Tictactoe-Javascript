@@ -9,14 +9,19 @@
   </head>
   <body>
     <div id="docRoot">
-      <h4 class="symbol-section">
-        Player One, Choose:
-        <span class="symbol" data-symbol="X">X</span>
-      </h4>
-      <div class="root"></div>
+      <form>
+        <label id="label1" for="name1">Player 1 ('X')</label>
+        <input id="name1" name="name1" type="text" required /> <br />
+
+        <label id="label2" for="name2">Player 2 ('O')</label>
+        <input id="name2" name="name2" type="text" required />
+      </form>
+      <button class="submit">submit</button><br /><br />
+
+      <div class="root">Start Game</div>
       <div id="app"></div>
       <br />
-      <button>Reset</button>
+      <button class="reset">Reset</button>
     </div>
     <script src="./main.js" type="module"></script>
   </body>

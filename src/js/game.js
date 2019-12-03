@@ -1,5 +1,4 @@
 import board from "./board.js";
-import Players from "./player.js";
 
 const gameFactory = (() => {
   let won = null;
@@ -15,6 +14,11 @@ const gameFactory = (() => {
     [0, 4, 8],
     [2, 4, 6]
   ];
+
+  let names = {
+    X: "",
+    O: ""
+  };
 
   const resetBtn = () => {
     board.resetBoard();
@@ -33,35 +37,13 @@ const gameFactory = (() => {
 
   const checkTie = x => board.grid.every(board.emptyCell) && x === 0;
 
-  const cellClickedEventHandler = evt => {
-    const cellValue = evt.target.dataset.value;
-    if (!evt.target.classList.contains("cell")) return;
-
-    if (board.grid[cellValue] !== null) {
-      alert("Position is already filled up - try another cell.");
-      return;
-    }
-    board.grid[cellValue] = Players.player;
-    evt.target.innerHTML = Players.player;
-
-    won = gameIsWon(Players.player);
-
-    draw = checkTie(won);
-    if (won) {
-      alert(`the game was won by player with symbol ${Players.player}`);
-      return;
-    }
-    if (draw) {
-      alert(`this is a tie`);
-    }
-    Players.player = Players.player === "X" ? "O" : "X";
-  };
-
   return {
+    won,
+    draw,
     resetBtn,
     gameIsWon,
     checkTie,
-    cellClickedEventHandler
+    names
   };
 })();
 

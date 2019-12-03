@@ -1,22 +1,80 @@
-import player from "./src/js/player.js";
+import players from "./src/js/player.js";
 import board from "./src/js/board.js";
 import game from "./src/js/game.js";
 
-var docRoot = document.getElementById("docRoot");
-var gameCanvas = docRoot.querySelector("#app");
-const symbol = docRoot.querySelectorAll(".symbol");
-const button = docRoot.querySelector("button");
+let docRoot = document.getElementById("docRoot");
+let gameCanvas = docRoot.querySelector("#app");
+let root = docRoot.querySelector(".root");
+let symbol = docRoot.querySelectorAll(".symbol");
+let reset = docRoot.querySelector(".reset");
+let submit = document.querySelector(".submit");
+let name1 = document.querySelector("#name1");
+let name2 = document.querySelector("#name2");
+
+// gameCanvas.hidden = true;
+reset.hidden = true;
+root.hidden = true;
 
 gameCanvas.innerHTML = board.drawGrid();
 const cell = docRoot.querySelectorAll(".cell");
 symbol.forEach(sym => sym.addEventListener("click", player.picksymbol));
-gameCanvas.addEventListener("click", game.cellClickedEventHandler);
 
-const bottonClickEventHandler = () => {
+const resetBottonClickEventHandler = () => {
   game.resetBtn();
-  let count = 0;
   cell.forEach(num => {
     num.innerHTML = "";
   });
+  window.location.reload();
 };
-button.addEventListener("click", bottonClickEventHandler);
+
+const submitButtonClickEventHandler = evt => {
+  evt.preventDefault();
+  if (!name1.value || !name2.value) {
+    alert("Please check, a required field(s) are empty");
+  } else {
+    name1.value;
+    name2.value;
+    game.names["X"] = name1.value;
+    game.names["O"] = name2.value;
+    name1.hidden = true;
+    name2.hidden = true;
+    label1.hidden = true;
+    label2.hidden = true;
+    submit.hidden = true;
+    root.hidden = false;
+    reset.hidden = false;
+  }
+};
+
+const cellClickedEventHandler = evt => {
+  evt.preventDefault();
+  if (!name1.value || !name2.value) {
+    alert("Please check, a required field(s) are empty");
+  } else {
+    const cellValue = evt.target.dataset.value;
+    if (!evt.target.classList.contains("cell")) return;
+
+    if (board.grid[cellValue] !== null) {
+      alert("Position is already filled up - try another cell.");
+      return;
+    }
+    board.grid[cellValue] = players.player;
+    evt.target.innerHTML = players.player;
+
+    game.won = game.gameIsWon(players.player);
+    game.draw = game.checkTie(game.won);
+    if (game.won && players.player === "X") {
+      alert(`${game.names.X} won the game`);
+    } else if (game.won && players.player === "O") {
+      alert(`${game.names.O} won the game`);
+    }
+    if (game.draw) {
+      alert(`this is a tie`);
+    }
+    players.player = players.player === "X" ? "O" : "X";
+  }
+};
+
+reset.addEventListener("click", resetBottonClickEventHandler);
+submit.addEventListener("click", submitButtonClickEventHandler);
+gameCanvas.addEventListener("click", cellClickedEventHandler);
