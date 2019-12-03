@@ -4,10 +4,9 @@ Tic-tac-toe is a game for two players, X and O, who take turns marking the space
 
 #### Getting Started
 
-To test the game, clone the repo on your local machine, by typing:
+To test the game, clone the repo on your local machine, by typing on your terminal:
 
 git clone `git@github.com:IBTechRaj/tictactoe-javascript.git`
-Open your terminal and go to the project root directory:
 
 `cd` tictactoe-javascript
 To run it on the browser click on `Go Live` if your editor is VSCode, it's a bottom of the editor, or find the folder in your machine, go to html file and run it on the browser of your choice.
