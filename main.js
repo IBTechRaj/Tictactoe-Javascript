@@ -29,7 +29,7 @@ const resetBottonClickEventHandler = () => {
 const submitButtonClickEventHandler = evt => {
   evt.preventDefault();
   if (!name1.value || !name2.value) {
-    alert("Please check, a required field(s) are empty");
+    alert("Please enter your name(s), a required field(s) are empty");
   } else {
     name1.value;
     name2.value;
@@ -48,7 +48,7 @@ const submitButtonClickEventHandler = evt => {
 const cellClickedEventHandler = evt => {
   evt.preventDefault();
   if (!name1.value || !name2.value) {
-    alert("Please check, a required field(s) are empty");
+    alert("Please enter your name(s), a required field(s) are empty");
   } else {
     const cellValue = evt.target.dataset.value;
     if (!evt.target.classList.contains("cell")) return;
